@@ -1,0 +1,1 @@
+export const JWT_SECRET = (globalThis as any).process?.env?.JWT_SECRET || "123123";

@@ -1,16 +1,19 @@
 import express from "express";
 import jwt from "jsonwebtoken";
-import {JWT_SECRET} from "@repo/common/config";
+
+// Read JWT secret from environment. Avoids importing path-alias modules that may not be
+// resolvable in this project setup.
+const JWT_SECRET = process.env.JWT_SECRET || "dev_jwt_secret";
 import { middleware } from "./middleware";
-import { CreateUserSchema, SigninSchema, CreateRoomSchema } from "@repo/common/types";
-import { prismaClient } from "@repo/db/client";
+import { CreateUserSchema, SigninSchema, CreateRoomSchema } from "@repo/common";
+import { prismaClient } from "@repo/db";
 import cors from "cors";
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.post("/signup",async(req,res)=>{
-    const parseData = CreateRoomSchema.safeParse(req.body);
+    const parseData = CreateUserSchema.safeParse(req.body);
     if(!parseData.success) {
         console.log(parseData.error);
         res.json({
@@ -27,7 +30,7 @@ app.post("/signup",async(req,res)=>{
             }
         })
         res.json({
-            userId: user.Id
+            userId: user.id
         })
     }catch(e){
         res.status(411).json({
