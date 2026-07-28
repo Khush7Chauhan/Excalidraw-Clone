@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { WS_URL } from "../app/config";
+import { useEffect, useState } from "preact/hooks";
+import { WS_URL } from "../../app/config";
 
 export function useSocket() {
     const [loading, setLoading] = useState(true);
