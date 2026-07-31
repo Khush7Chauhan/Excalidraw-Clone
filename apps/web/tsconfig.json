@@ -1,0 +1,7 @@
+{
+  "extends": "../../packages/typescript-config/react.json",
+  "compilerOptions": {
+    "ignoreDeprecations": "6.0"
+  },
+  "include": ["src", "vite.config.ts", "tailwind.config.ts"]
+}
